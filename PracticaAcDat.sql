@@ -82,12 +82,17 @@ BEGIN
 	--Es decir, si figura en la tabla Asignaciones, no debe de tener su campo FechaAsignacion a NULL
 	--(Este trigger lo garantiza)
 
-	--Calculamos la cantidad de contenedores que ocupan los envios que esten asignados a @IDAlmacen (cuyas ID figuren en Asignaciones)
+	--Calculamos la cantidad de contenedores que ocupan los envios que esten asignados a @IDAlmacen (cuyas ID figuren en Asignaciones). 
 	SELECT @NumeroContenedores = SUM(NumeroContenedores)
 	FROM Asignaciones
 	INNER JOIN Envios ON IDEnvio = ID
 	WHERE IDAlmacen = @IDAlmacen
 
+	--Se le ha de sumar la cantidad de contenedores que incluye el pedido a almacenar
+	SELECT @NumeroContenedores = @NumeroContenedores + NumeroContenedores
+	FROM Envios
+	WHERE ID = @IDEnvio
+	
 	SELECT @capacidadRestante = (Capacidad - @NumeroContenedores) FROM Almacenes
 	WHERE ID = @IDAlmacen
 
