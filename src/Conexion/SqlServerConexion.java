@@ -1,5 +1,7 @@
 package Conexion;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
