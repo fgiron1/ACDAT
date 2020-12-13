@@ -1,20 +1,20 @@
+import Gestoras.GestoraAsignaciones;
 import Gestoras.GestoraEnvios;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        GestoraEnvios ges = new GestoraEnvios();
+        GestoraEnvios gesEnvios = new GestoraEnvios();
+        GestoraAsignaciones gesAsignaciones = new GestoraAsignaciones();
         int idLeido;
 
-        ges.mostrarEnviosSinAsignar();
+        gesEnvios.mostrarEnviosSinAsignar();
 
-        idLeido = ges.leerYValidarEnvioSinAsignar();
+        idLeido = gesEnvios.leerYValidarEnvioSinAsignar();
+
+        gesAsignaciones.asignarContenedor(idLeido);
 
     }
-
 
 }
